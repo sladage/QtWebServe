@@ -1,0 +1,8 @@
+22.03.2015 17:12:24.585 0 DEBUG 3040672064 QtWebAppLib has version 1.4.1
+22.03.2015 17:12:24.585 0 DEBUG 3040672064 ServiceHelper: Starting service
+22.03.2015 17:12:24.585 0 DEBUG 3040672064 HttpListener: Listening on port 8080
+22.03.2015 17:12:24.585 0 DEBUG 3040672064 You see these debug messages because the logging buffer is enabled
+22.03.2015 17:12:24.585 1 WARNING 3040672064 ServiceHelper: Service has started
+
+
+

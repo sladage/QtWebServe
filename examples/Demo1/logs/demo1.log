@@ -1,0 +1,22 @@
+03.04.2015 21:33:43.961 0 DEBUG 3040504128 QtWebAppLib has version 1.5.0
+03.04.2015 21:33:43.961 0 DEBUG 3040504128 TemplateLoader: path=/home/stefan/Programmierung/QtWebApp/Demo1/etc/templates, codec=UTF-8
+03.04.2015 21:33:43.961 0 DEBUG 3040504128 TemplateCache: timeout=60000, size=1000000
+03.04.2015 21:33:43.961 0 DEBUG 3040504128 HttpSessionStore: Sessions expire after 3600000 milliseconds
+03.04.2015 21:33:43.962 0 DEBUG 3040504128 StaticFileController: docroot=/home/stefan/Programmierung/QtWebApp/Demo1/etc/docroot, encoding=UTF-8, maxAge=60000
+03.04.2015 21:33:43.962 0 DEBUG 3040504128 StaticFileController: cache timeout=60000, size=1000000
+03.04.2015 21:33:43.962 0 DEBUG 3040504128 ServiceHelper: Starting service
+03.04.2015 21:33:43.962 0 DEBUG 3040504128 HttpListener: Listening on port 8080
+03.04.2015 21:33:43.963 0 DEBUG 3040504128 You see these debug messages because the logging buffer is enabled
+03.04.2015 21:33:43.963 1 WARNING 3040504128 Application has started
+
+
+22.06.2015 17:46:21.566 0 DEBUG 140562905347904 QtWebAppLib has version 1.5.5
+22.06.2015 17:46:21.567 0 DEBUG 140562905347904 TemplateLoader: path=/home/stefan/Programmierung/QtWebApp/Demo1/etc/templates, codec=UTF-8
+22.06.2015 17:46:21.567 0 DEBUG 140562905347904 TemplateCache: timeout=60000, size=1000000
+22.06.2015 17:46:21.568 0 DEBUG 140562905347904 HttpSessionStore: Sessions expire after 3600000 milliseconds
+22.06.2015 17:46:21.568 0 DEBUG 140562905347904 StaticFileController: docroot=/home/stefan/Programmierung/QtWebApp/Demo1/etc/docroot, encoding=UTF-8, maxAge=60000
+22.06.2015 17:46:21.568 0 DEBUG 140562905347904 StaticFileController: cache timeout=60000, size=1000000
+22.06.2015 17:46:21.568 0 DEBUG 140562905347904 ServiceHelper: Starting service
+22.06.2015 17:46:21.583 0 DEBUG 140562905347904 HttpListener: Listening on port 8080
+22.06.2015 17:46:21.583 0 DEBUG 140562905347904 You see these debug messages because the logging buffer is enabled
+22.06.2015 17:46:21.583 1 WARNING 140562905347904 Application has started
