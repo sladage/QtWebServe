@@ -27,6 +27,11 @@ QMap<QByteArray,QByteArray>& HttpResponse::getHeaders() {
     return headers;
 }
 
+void HttpResponse::setStatus(HttpStatus statusCode, QByteArray description) {
+    this->statusCode=static_cast<int>(statusCode);
+    statusText=description;
+}
+
 void HttpResponse::setStatus(int statusCode, QByteArray description) {
     this->statusCode=statusCode;
     statusText=description;

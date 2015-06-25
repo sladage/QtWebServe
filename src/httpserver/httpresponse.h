@@ -68,6 +68,12 @@ public:
     /**
       Set status code and description. The default is 200,OK.
     */
+
+    void setStatus(HttpStatus statusCode, QByteArray description=QByteArray());
+
+    /**
+      Set status code and description. The default is 200,OK.
+    */
     void setStatus(int statusCode, QByteArray description=QByteArray());
 
     /**
