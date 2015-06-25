@@ -14,6 +14,7 @@
 #include <QTemporaryFile>
 #include <QUuid>
 #include "httpglobal.h"
+#include "httpstatus.h"
 
 /**
   This object represents a single HTTP request. It reads the request

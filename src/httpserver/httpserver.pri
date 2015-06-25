@@ -18,7 +18,8 @@ HEADERS += $$PWD/httpglobal.h \
            $$PWD/httprequesthandler.h \
            $$PWD/httpsession.h \
            $$PWD/httpsessionstore.h \
-           $$PWD/staticfilecontroller.h
+           $$PWD/staticfilecontroller.h \
+    $$PWD/httpstatus.h
 
 SOURCES += $$PWD/httpglobal.cpp \
            $$PWD/httplistener.cpp \

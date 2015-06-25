@@ -11,6 +11,7 @@
 #include <QTcpSocket>
 #include "httpglobal.h"
 #include "httpcookie.h"
+#include "httpstatus.h"
 
 /**
   This object represents a HTTP response, in particular the response headers.
