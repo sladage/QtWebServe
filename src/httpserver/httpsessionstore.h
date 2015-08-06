@@ -36,7 +36,7 @@ class DECLSPEC HttpSessionStore : public QObject {
 public:
 
     /** Constructor. */
-    HttpSessionStore(QSettings* settings, QObject* parent);
+    HttpSessionStore(QSettings* settings, QObject* parent=NULL);
 
     /** Destructor */
     virtual ~HttpSessionStore();

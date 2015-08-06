@@ -8,6 +8,7 @@
 
 #include <QtCore/QCoreApplication>
 #include "qtservice.h"
+#include "httplistener.h"
 
 /**
   Helper class to install and run the application as a windows
@@ -31,6 +32,13 @@ protected:
       abnormally, e.g. after a fatal error, or when killed from outside.
     */
     void stop();
+
+private:
+
+    /**
+     * Listens for HTTP connections.
+     */
+    HttpListener* listener;
 
 };
 

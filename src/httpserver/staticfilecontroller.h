@@ -46,7 +46,7 @@ class DECLSPEC StaticFileController : public HttpRequestHandler  {
 public:
 
     /** Constructor */
-    StaticFileController(QSettings* settings, QObject* parent = 0);
+    StaticFileController(QSettings* settings, QObject* parent = NULL);
 
     /** Generates the response */
     void service(HttpRequest& request, HttpResponse& response);
@@ -60,7 +60,7 @@ private:
     QString docroot;
 
     /** Maximum age of files in the browser cache */
-    int maxAge;    
+    int maxAge;
 
     struct CacheEntry {
         QByteArray document;

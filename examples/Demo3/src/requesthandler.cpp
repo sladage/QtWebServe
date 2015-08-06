@@ -23,5 +23,9 @@ void RequestHandler::service(HttpRequest& request, HttpResponse& response) {
     response.write("<html><body>Hello World</body></html>",true);
 
     qDebug("Conroller: finished request");
-    logger->clear();
+
+    // Clear the log buffer
+    if (logger) {
+       logger->clear();
+    }
 }

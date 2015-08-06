@@ -37,11 +37,9 @@ HttpConnectionHandler::HttpConnectionHandler(QSettings* settings, HttpRequestHan
 
 
 HttpConnectionHandler::~HttpConnectionHandler() {
-    socket->close();
-    socket->deleteLater();
     quit();
     wait();
-
+    delete socket;
     qDebug("HttpConnectionHandler (%p): destroyed", this);
 }
 
@@ -70,6 +68,7 @@ void HttpConnectionHandler::run() {
     catch (...) {
         qCritical("HttpConnectionHandler (%p): an uncatched exception occured in the thread",this);
     }
+    socket->close();
     qDebug("HttpConnectionHandler (%p): thread stopped", this);
 }
 
@@ -182,6 +181,9 @@ void HttpConnectionHandler::read() {
             if (!response.hasSentLastPart()) {
                 response.write(QByteArray(),true);
             }
+
+            qDebug("HttpConnectionHandler (%p): finished request",this);
+
             // Close the connection after delivering the response, if requested
             if (QString::compare(currentRequest->getHeader("Connection"),"close",Qt::CaseInsensitive)==0) {
                 socket->disconnectFromHost();

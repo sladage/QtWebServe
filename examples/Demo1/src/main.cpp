@@ -5,23 +5,12 @@
 
 #include <QCoreApplication>
 #include <QDir>
-#include <QFile>
 #include "httplistener.h"
 #include "templatecache.h"
 #include "httpsessionstore.h"
 #include "staticfilecontroller.h"
 #include "filelogger.h"
 #include "requestmapper.h"
-
-/** Name of this application */
-#define APPNAME "Demo1"
-
-/** Publisher of this application */
-#define ORGANISATION "Butterfly"
-
-
-/** The HTTP listener of the application */
-HttpListener* listener;
 
 /** Cache for template files */
 TemplateCache* templateCache;
@@ -32,8 +21,9 @@ HttpSessionStore* sessionStore;
 /** Controller for static files */
 StaticFileController* staticFileController;
 
-/** Logger class */
+/** Redirects log messages to a file */
 FileLogger* logger;
+
 
 /** Search the configuration file */
 QString searchConfigFile() {
@@ -72,53 +62,50 @@ QString searchConfigFile() {
     return 0;
 }
 
+
 /**
   Entry point of the program.
 */
 int main(int argc, char *argv[]) {
+    QCoreApplication app(argc,argv);
 
-    // Initialize the core application
-    QCoreApplication* app=new QCoreApplication(argc, argv);
-    app->setApplicationName(APPNAME);
-    app->setOrganizationName(ORGANISATION);
+    app.setApplicationName("Demo1");
+    app.setOrganizationName("Butterfly");
 
     // Find the configuration file
     QString configFileName=searchConfigFile();
 
-    // Configure logging
-    QSettings* logSettings=new QSettings(configFileName,QSettings::IniFormat,app);
+    // Configure logging into a file
+    /*
+    QSettings* logSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     logSettings->beginGroup("logging");
-    logger=new FileLogger(logSettings,10000,app);
+    FileLogger* logger=new FileLogger(logSettings,10000,&app);
     logger->installMsgHandler();
-
-    // Log the library version
-    qDebug("QtWebAppLib has version %s",getQtWebAppLibVersion());
+    */
 
     // Configure template loader and cache
-    QSettings* templateSettings=new QSettings(configFileName,QSettings::IniFormat,app);
+    QSettings* templateSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     templateSettings->beginGroup("templates");
-    templateCache=new TemplateCache(templateSettings,app);
+    templateCache=new TemplateCache(templateSettings,&app);
 
     // Configure session store
-    QSettings* sessionSettings=new QSettings(configFileName,QSettings::IniFormat,app);
+    QSettings* sessionSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     sessionSettings->beginGroup("sessions");
-    sessionStore=new HttpSessionStore(sessionSettings,app);
+    sessionStore=new HttpSessionStore(sessionSettings,&app);
 
     // Configure static file controller
-    QSettings* fileSettings=new QSettings(configFileName,QSettings::IniFormat,app);
+    QSettings* fileSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     fileSettings->beginGroup("docroot");
-    staticFileController=new StaticFileController(fileSettings,app);
+    staticFileController=new StaticFileController(fileSettings,&app);
 
     // Configure and start the TCP listener
-    qDebug("ServiceHelper: Starting service");
-    QSettings* listenerSettings=new QSettings(configFileName,QSettings::IniFormat,app);
+    QSettings* listenerSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     listenerSettings->beginGroup("listener");
-    listener=new HttpListener(listenerSettings,new RequestMapper(app),app);
+    new HttpListener(listenerSettings,new RequestMapper(&app),&app);
 
-    if (logSettings->value("bufferSize",0).toInt()>0 && logSettings->value("minLevel",0).toInt()>0) {
-        qDebug("You see these debug messages because the logging buffer is enabled");
-    }
     qWarning("Application has started");
 
-    return app->exec();
+    app.exec();
+
+    qWarning("Application has stopped");
 }

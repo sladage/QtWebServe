@@ -6,7 +6,6 @@
 #include "static.h"
 #include "startup.h"
 #include "filelogger.h"
-#include "httplistener.h"
 #include "requesthandler.h"
 #include <QDir>
 #include <QFile>
@@ -19,9 +18,6 @@
 
 /** Short description of the Windows service */
 #define DESCRIPTION "Demo application for QtWebApp"
-
-/** The HTTP listener of the application */
-HttpListener* listener;
 
 /** Logger class */
 FileLogger* logger;
@@ -72,15 +68,11 @@ void Startup::start() {
     // Find the configuration file
     QString configFileName=searchConfigFile();
 
-    // Configure logging.
-    // This part is optional but highly recommended to be able to see error messages.
+    // Configure logging into a file
     QSettings* logSettings=new QSettings(configFileName,QSettings::IniFormat,app);
     logSettings->beginGroup("logging");
     logger=new FileLogger(logSettings,10000,app);
     logger->installMsgHandler();
-
-    // Log the library version
-    qDebug("QtWebAppLib has version %s",getQtWebAppLibVersion());
 
     // Configure and start the TCP listener
     qDebug("ServiceHelper: Starting service");
@@ -88,22 +80,15 @@ void Startup::start() {
     listenerSettings->beginGroup("listener");
     listener=new HttpListener(listenerSettings,new RequestHandler(app),app);
 
-    if (logSettings->value("bufferSize",0).toInt()>0 && logSettings->value("minLevel",0).toInt()>0) {
-        qDebug("You see these debug messages because the logging buffer is enabled");
-    }
-    qWarning("ServiceHelper: Service has started");
+    qWarning("Startup: Service has started");
 }
 
 void Startup::stop() {
-    // Note that the stop method is not called when you terminate the application abnormally
-    // by pressing Ctrl-C or when you kill it by the task manager of your operating system.
+    // Note that this method is only called when the application exits itself.
+    // It is not called when you close the window, press Ctrl-C or send a kill signal.
 
-    // Deleting the listener here is optionally because QCoreApplication does it already.
-    // However, QCoreApplication closes the logger at first, so we would not see the shutdown
-    // debug messages, without the following line of code:
     delete listener;
-
-    qWarning("ServiceHelper: Service has been stopped");
+    qWarning("Startup: Service has been stopped");
 }
 
 
