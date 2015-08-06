@@ -3,9 +3,9 @@
   @author Stefan Frings
 */
 
+#include <QDateTime>
 #include "sessioncontroller.h"
 #include "httpsessionstore.h"
-#include <QDateTime>
 
 /** Storage for session cookies */
 extern HttpSessionStore* sessionStore;

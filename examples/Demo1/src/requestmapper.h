@@ -25,7 +25,12 @@ public:
     RequestMapper(QObject* parent=0);
 
     /**
-      Dispatch a request to a controller.
+      Destructor.
+    */
+    ~RequestMapper();
+
+    /**
+      Dispatch incoming HTTP requests to different controllers depending on the URL.
       @param request The received HTTP request
       @param response Must be used to return the response
     */

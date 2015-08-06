@@ -1,8 +1,7 @@
-04.04.2015 08:03:06.069 0 DEBUG 3039762176 QtWebAppLib has version 1.5.0
-04.04.2015 08:03:06.069 0 DEBUG 3039762176 ServiceHelper: Starting service
-04.04.2015 08:03:06.095 0 DEBUG 3039762176 HttpListener: Listening on port 8080
-04.04.2015 08:03:06.095 0 DEBUG 3039762176 You see these debug messages because the logging buffer is enabled
-04.04.2015 08:03:06.095 1 WARNING 3039762176 Application has started
+26.07.2015 07:42:58.159 1 WARNING 139659983566656 Application has started
+26.07.2015 07:44:21.411 0 DEBUG 140113252636480 RequestHandler: created
+26.07.2015 07:44:21.411 0 DEBUG 140113252636480 HttpListener: Listening on port 8080
+26.07.2015 07:44:21.411 1 WARNING 140113252636480 Application has started
 
-
+Note: If you don't see new messages here, then the logger might be commented out in main.cpp.
 

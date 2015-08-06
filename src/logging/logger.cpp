@@ -9,6 +9,7 @@
 #include <QMutex>
 #include <QDateTime>
 #include <QThread>
+#include <QObject>
 
 Logger* Logger::defaultLogger=0;
 

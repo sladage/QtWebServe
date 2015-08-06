@@ -1,4 +1,4 @@
-PROJECT_NAME           = QtWebServe
+PROJECT_NAME           = QtWebApp
 OUTPUT_DIRECTORY       = doc
 JAVADOC_AUTOBRIEF      = YES
 QUIET                  = YES

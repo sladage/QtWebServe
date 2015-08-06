@@ -3,8 +3,8 @@
   @author Stefan Frings
 */
 
-#ifndef LISTENER_H
-#define LISTENER_H
+#ifndef HTTPLISTENER_H
+#define HTTPLISTENER_H
 
 #include <QTcpServer>
 #include <QSettings>
@@ -49,11 +49,17 @@ public:
       @param settings Configuration settings for the HTTP server. Must not be 0.
       @param requestHandler Processes each received HTTP request, usually by dispatching to controller classes.
       @param parent Parent object.
+      @warning Ensure to close or delete the listener before deleting the request handler.
     */
-    HttpListener(QSettings* settings, HttpRequestHandler* requestHandler, QObject* parent = 0);
+    HttpListener(QSettings* settings, HttpRequestHandler* requestHandler, QObject* parent = NULL);
 
     /** Destructor */
     virtual ~HttpListener();
+
+    /**
+     Close the listener and wait until all pending requests are processed.
+    */
+    void close();
 
 protected:
 
@@ -79,4 +85,4 @@ signals:
 
 };
 
-#endif // LISTENER_H
+#endif // HTTPLISTENER_H

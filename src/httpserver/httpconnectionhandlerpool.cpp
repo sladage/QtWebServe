@@ -23,7 +23,7 @@ HttpConnectionHandlerPool::HttpConnectionHandlerPool(QSettings* settings, HttpRe
 HttpConnectionHandlerPool::~HttpConnectionHandlerPool() {
     // delete all connection handlers and wait until their threads are closed
     foreach(HttpConnectionHandler* handler, pool) {
-       handler->deleteLater();
+       delete handler;
     }
     delete sslConfiguration;
     qDebug("HttpConnectionHandlerPool (%p): destroyed", this);

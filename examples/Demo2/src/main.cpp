@@ -10,16 +10,6 @@
 #include <logging/filelogger.h>
 #include "requesthandler.h"
 
-/** Name of this application */
-#define APPNAME "Demo2"
-
-/** Publisher of this application */
-#define ORGANISATION "Butterfly"
-
-
-/** The HTTP listener of the application */
-HttpListener* listener;
-
 /** Logger class */
 FileLogger* logger;
 
@@ -62,36 +52,34 @@ QString searchConfigFile() {
 
 /**
   Entry point of the program.
+  Quick and dirty, without cleaning up on exit (which is Ok for this simple program).
 */
 int main(int argc, char *argv[]) {
 
     // Initialize the core application
-    QCoreApplication* app=new QCoreApplication(argc, argv);
-    app->setApplicationName(APPNAME);
-    app->setOrganizationName(ORGANISATION);
+    QCoreApplication app(argc, argv);
+    app.setApplicationName("Demo2");
+    app.setOrganizationName("Butterfly");
 
     // Find the configuration file
     QString configFileName=searchConfigFile();
 
-    // Configure logging
-    QSettings* logSettings=new QSettings(configFileName,QSettings::IniFormat,app);
+    // Configure logging into a file
+    /*
+    QSettings* logSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     logSettings->beginGroup("logging");
-    logger=new FileLogger(logSettings,10000,app);
+    logger=new FileLogger(logSettings,10000,&app);
     logger->installMsgHandler();
-
-    // Log the library version
-    qDebug("QtWebAppLib has version %s",getQtWebAppLibVersion());
+    */
 
     // Configure and start the TCP listener
-    qDebug("ServiceHelper: Starting service");
-    QSettings* listenerSettings=new QSettings(configFileName,QSettings::IniFormat,app);
+    QSettings* listenerSettings=new QSettings(configFileName,QSettings::IniFormat,&app);
     listenerSettings->beginGroup("listener");
-    listener=new HttpListener(listenerSettings,new RequestHandler(app),app);
+    new HttpListener(listenerSettings,new RequestHandler(&app),&app);
 
-    if (logSettings->value("bufferSize",0).toInt()>0 && logSettings->value("minLevel",0).toInt()>0) {
-        qDebug("You see these debug messages because the logging buffer is enabled");
-    }
     qWarning("Application has started");
 
-    return app->exec();
+    app.exec();
+
+    qWarning("Application has stopped");
 }

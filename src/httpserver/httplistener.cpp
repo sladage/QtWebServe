@@ -12,6 +12,7 @@ HttpListener::HttpListener(QSettings* settings, HttpRequestHandler* requestHandl
     : QTcpServer(parent)
 {
     Q_ASSERT(settings!=0);
+    Q_ASSERT(requestHandler!=0);
     // Reqister type of socketDescriptor for signal/slot handling
     qRegisterMetaType<tSocketDescriptor>("tSocketDescriptor");
     // Create connection handler pool
@@ -29,18 +30,31 @@ HttpListener::HttpListener(QSettings* settings, HttpRequestHandler* requestHandl
     }
 }
 
+
 HttpListener::~HttpListener() {
     close();
-    qDebug("HttpListener: closed");
-    pool->deleteLater();
     qDebug("HttpListener: destroyed");
+}
+
+
+void HttpListener::close() {
+    QTcpServer::close();
+    qDebug("HttpListener: closed");
+    if (pool) {
+        delete pool;
+        pool=NULL;
+    }
 }
 
 void HttpListener::incomingConnection(tSocketDescriptor socketDescriptor) {
 #ifdef SUPERVERBOSE
     qDebug("HttpListener: New connection");
 #endif
-    HttpConnectionHandler* freeHandler=pool->getConnectionHandler();
+
+    HttpConnectionHandler* freeHandler=NULL;
+    if (pool) {
+        freeHandler=pool->getConnectionHandler();
+    }
 
     // Let the handler process the new connection.
     if (freeHandler) {

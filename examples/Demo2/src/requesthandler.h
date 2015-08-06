@@ -24,6 +24,11 @@ public:
     RequestHandler(QObject* parent=0);
 
     /**
+      Destructor
+    */
+    ~RequestHandler();
+
+    /**
       Process an incoming HTTP request.
       @param request The received HTTP request
       @param response Must be used to return the response
