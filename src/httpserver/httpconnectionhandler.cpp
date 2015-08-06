@@ -186,6 +186,7 @@ void HttpConnectionHandler::read() {
 
             // Close the connection after delivering the response, if requested
             if (QString::compare(currentRequest->getHeader("Connection"),"close",Qt::CaseInsensitive)==0) {
+                socket->flush();
                 socket->disconnectFromHost();
             }
             else {
